@@ -11,3 +11,16 @@ before_install:
 script:
   # running the container up
   - docker run -e CI=true goahead19/react_app_docker npm run test -- --coverage
+#once the test retrun a status 0 (all tests passed) we can proceed with deploy
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'docker' #the name of the app created on AWS
+  env: 'docker-env' # the environment name of the app created on AWS
+  bucket_name: 'elasticbeanstalk-us-east-1-923445559289' #bucket name on S3 
+  bucket_path: 'docker'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
