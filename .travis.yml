@@ -5,7 +5,9 @@ services:
   - docker # saying to travis that we need docker CLI to be installed 
 
 before_install:
-  - docker build -t goahead19/React_app_docker -f Dockerfile.dev . # building the image
+  # building the image
+  - docker build -t goahead19/react_app_docker -f Dockerfile.dev . 
 
 script:
-  - docker run -e CI=true stephengrider/React_app_docker npm run test # running the container up
+  # running the container up
+  - docker run -e CI=true stephengrider/react_app_docker npm run test 
